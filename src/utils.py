@@ -1,5 +1,5 @@
 import json
-import datetime
+from datetime import datetime
 
 
 def get_data(filename):
@@ -24,11 +24,7 @@ def get_operations_executed(data):
     return operations_from
 
 
-#def change_format_date(date: str) -> str:
-    #date = date.split('T')[0].split('-')
-    #return f'{date[2]}.{date[1]}.{date[0]}'
-
-def get_last_num_operations(operation_from, operations_num):
+def get_last_five_operations(operation_from, operations_num):
     """Функция выводит последние пять операций"""
     operations_sorted = sorted(operation_from, key=lambda operation: operation['date'], reverse=True)
     last_five_operations = operations_sorted[0:operations_num]
@@ -41,13 +37,12 @@ def get_formatted(last_five_operations):
     откуда, куда, сумма перевода, валюта"""
     formatted_list = []
     for operation in last_five_operations:
-        #date = datetime.strptime(operation['date'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%d.%m.%Y')
-        date = date.split('T')[0].split('-')
-        return f'{date[2]}.{date[1]}.{date[0]}'
+        date = datetime.strptime(operation['date'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%d.%m.%Y')
 
-    for operation in last_five_operations:
         description = operation['description']
+
         payer_info, payment_mathod = "", ""
+
         if "from" in operation:
             payer = operation['from'].split()
             payment_mathod = payer.pop(-1)
@@ -58,5 +53,6 @@ def get_formatted(last_five_operations):
             payer_info = " ".join(payer)
         beneficiary = f"{operation['to'].split()[0]} **{operation['to'][-4:]}"
         operation_amount = f"{operation['operationAmount']['amount']} {operation['operationAmount']['currency']['name']}"
-        formatted_list.append(f"{date} {description}\n{payer_info} {payment_mathod_from}->{beneficiary}\n{operation_amount}")
+        formatted_list.append(f"{date} {description}\n{payer_info} {payment_mathod_from} -> {beneficiary}\n"
+                              f"{operation_amount}")
     return formatted_list
