@@ -3,7 +3,8 @@ from src import utils
 
 def main():
     filename = 'operations.json'
-    amount_of_operation = 5
+# можно ввести любое необходимое количество операций для вывода.
+    amount_of_operation = 7
 
     data = utils.get_data(filename)
     operations_executed = utils.get_operations_executed(data)
