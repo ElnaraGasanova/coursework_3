@@ -24,6 +24,7 @@ def get_operations_executed(data):
     return operations_from
 
 
+
 def get_last_five_operations(operation_from, operations_num):
     """Функция выводит последние пять операций"""
     operations_sorted = sorted(operation_from, key=lambda operation: operation['date'], reverse=True)
@@ -51,8 +52,8 @@ def get_formatted(last_five_operations):
             else:
                 payment_mathod_from = f"{payment_mathod[-4:]} {payment_mathod[4:6]}** **** {payment_mathod[-4:]}"
             payer_info = " ".join(payer)
-        beneficiary = f"{operation['to'].split()[0]} **{operation['to'][-4:]}"
-        operation_amount = f"{operation['operationAmount']['amount']} {operation['operationAmount']['currency']['name']}"
-        formatted_list.append(f"{date} {description}\n{payer_info} {payment_mathod_from} -> {beneficiary}\n"
-                              f"{operation_amount}")
+            beneficiary = f"{operation['to'].split()[0]} **{operation['to'][-4:]}"
+            operation_amount = f"{operation['operationAmount']['amount']} {operation['operationAmount']['currency']['name']}"
+            formatted_list.append(f"{date} {description}\n{payer_info} {payment_mathod_from} -> {beneficiary}\n"
+                                  f"{operation_amount}")
     return formatted_list
