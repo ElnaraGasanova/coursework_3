@@ -19,3 +19,4 @@ def test_get_last_five_operations(test_data):
 
 def test_get_formatted(test_data):
     assert len(utils.get_formatted(test_data)) == 5
+    assert utils.get_formatted(test_data) is not None
